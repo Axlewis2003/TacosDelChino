@@ -1,28 +1,88 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Taco {
-    private String shell;      // corn, flour, hard shell, bowl
-    private String size;       // single, 3-taco, burrito
-    private String meat;       // carne asada, al pastor, etc.
-    private String cheese;     // Queso Fresco, Oaxaca, etc.
-    private List<String> regularToppings; // lettuce, cilantro, etc.
-    private String sauce;      // salsa verde, chipotle, etc.
+    private String shell;
+    private String size;
+    private String meat;
     private boolean extraMeat;
+    private String cheese;
     private boolean extraCheese;
-    private boolean withQueso;
+    private List<String> regularToppings;
+    private String sauce;
     private boolean withSalsa;
+    private boolean withQueso;
+
+    public Taco(String shell, String size, String meat, boolean extraMeat,
+                String cheese, boolean extraCheese, List<String> regularToppings,
+                String sauce, boolean withSalsa, boolean withQueso) {
+        this.shell = shell;
+        this.size = size;
+        this.meat = meat;
+        this.extraMeat = extraMeat;
+        this.cheese = cheese;
+        this.extraCheese = extraCheese;
+        this.regularToppings = regularToppings;
+        this.sauce = sauce;
+        this.withSalsa = withSalsa;
+        this.withQueso = withQueso;
+    }
 
     public double getPrice() {
         double base = 0;
-        if (size.equals("single")) base = 3.50;
-        if (size.equals("3-taco")) base = 9.00;
-        if (size.equals("burrito")) base = 8.50;
+        double meatPrice = 0;
+        double cheesePrice = 0;
+        double extraMeatPrice = 0;
+        double extraCheesePrice = 0;
 
-        double meatPrice = size.equals("single") ? 1.00 : size.equals("3-taco") ? 2.00 : 3.00;
-        double cheesePrice = size.equals("single") ? 0.75 : size.equals("3-taco") ? 1.50 : 2.25;
-        double extraMeatPrice = size.equals("single") ? 0.50 : size.equals("3-taco") ? 1.00 : 1.50;
-        double extraCheesePrice = size.equals("single") ? 0.30 : size.equals("3-taco") ? 0.60 : 0.90;
+        switch (size) {
+            case "single":
+                base = 3.50;
+                meatPrice = 1.00;
+                cheesePrice = 0.75;
+                extraMeatPrice = 0.50;
+                extraCheesePrice = 0.30;
+                break;
+            case "3-taco":
+                base = 9.00;
+                meatPrice = 2.00;
+                cheesePrice = 1.50;
+                extraMeatPrice = 1.00;
+                extraCheesePrice = 0.60;
+                break;
+            case "burrito":
+                base = 8.50;
+                meatPrice = 3.00;
+                cheesePrice = 2.25;
+                extraMeatPrice = 1.50;
+                extraCheesePrice = 0.90;
+                break;
+        }
 
-        return base + meatPrice + cheesePrice
-                + (extraMeat ? extraMeatPrice : 0)
-                + (extraCheese ? extraCheesePrice : 0);
+        double total = base + meatPrice + cheesePrice;
+        if (extraMeat) total += extraMeatPrice;
+        if (extraCheese) total += extraCheesePrice;
+        return total;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("  [").append(size.toUpperCase()).append("] Taco\n");
+        sb.append("    Shell: ").append(shell).append("\n");
+        sb.append("    Meat: ").append(meat);
+        if (extraMeat) sb.append(" (+ extra meat)");
+        sb.append("\n");
+        sb.append("    Cheese: ").append(cheese);
+        if (extraCheese) sb.append(" (+ extra cheese)");
+        sb.append("\n");
+        if (!regularToppings.isEmpty()) {
+            sb.append("    Toppings: ").append(String.join(", ", regularToppings)).append("\n");
+        }
+        sb.append("    Sauce: ").append(sauce).append("\n");
+        sb.append("    Covered in salsa: ").append(withSalsa ? "Yes" : "No").append("\n");
+        sb.append("    Covered in queso: ").append(withQueso ? "Yes" : "No").append("\n");
+        sb.append("    Price: $").append(String.format("%.2f", getPrice())).append("\n");
+        return sb.toString();
     }
 }
