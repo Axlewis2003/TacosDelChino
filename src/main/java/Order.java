@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private List<Taco> tacos;
-    private List<Drink> drinks;
+    private final List<Taco> tacos;
+    private final List<Drink> drinks;
     private ChipsAndSalsa chips;
 
     public Order() {
@@ -36,15 +36,6 @@ public class Order {
         return chips;
     }
 
-    public boolean isEmpty() {
-        return tacos.isEmpty() && drinks.isEmpty() && chips == null;
-    }
-
-    public boolean hasOnlyZeroTacosWithoutSide() {
-        // If no tacos, must have at least a drink or chips & salsa
-        return tacos.isEmpty() && drinks.isEmpty() && chips == null;
-    }
-
     public double getTotal() {
         double total = 0;
         for (Taco t : tacos) total += t.getPrice();
@@ -75,7 +66,7 @@ public class Order {
 
         if (chips != null) {
             sb.append("SIDES:\n");
-            sb.append(chips.toString());
+            sb.append(chips);
         }
 
         sb.append("====================================\n");

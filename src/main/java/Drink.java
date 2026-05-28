@@ -1,17 +1,17 @@
 public class Drink {
-    private String size;
+    private final String size;
 
     public Drink(String size) {
         this.size = size;
     }
 
     public double getPrice() {
-        switch (size) {
-            case "small":  return 2.00;
-            case "medium": return 2.50;
-            case "large":  return 3.00;
-            default:       return 2.00;
-        }
+        return switch (size) {
+            case "small" -> 2.00;
+            case "medium" -> 2.50;
+            case "large" -> 3.00;
+            default -> 2.00;
+        };
     }
 
     @Override

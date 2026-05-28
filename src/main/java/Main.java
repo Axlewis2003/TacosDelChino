@@ -180,7 +180,7 @@ public class Main {
             return;
         }
 
-        System.out.println(order.toString());
+        System.out.println(order);
 
         System.out.println("1) Confirm Order  2) Cancel Order");
         System.out.print("Choose: ");
@@ -202,7 +202,7 @@ public class Main {
             String filename = "receipts/" + timestamp + ".txt";
             File dir = new File("receipts");
             dir.mkdirs();
-            PrintWriter writer = new PrintWriter(new File(filename));
+            PrintWriter writer = new PrintWriter(filename);
             writer.println("TacosDelChino - Order Receipt");
             writer.println("Date/Time: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             writer.println(order.toString());

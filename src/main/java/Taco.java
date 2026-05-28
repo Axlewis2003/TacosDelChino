@@ -1,17 +1,16 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Taco {
-    private String shell;
-    private String size;
-    private String meat;
-    private boolean extraMeat;
-    private String cheese;
-    private boolean extraCheese;
-    private List<String> regularToppings;
-    private String sauce;
-    private boolean withSalsa;
-    private boolean withQueso;
+    private final String shell;
+    private final String size;
+    private final String meat;
+    private final boolean extraMeat;
+    private final String cheese;
+    private final boolean extraCheese;
+    private final List<String> regularToppings;
+    private final String sauce;
+    private final boolean withSalsa;
+    private final boolean withQueso;
 
     public Taco(String shell, String size, String meat, boolean extraMeat,
                 String cheese, boolean extraCheese, List<String> regularToppings,

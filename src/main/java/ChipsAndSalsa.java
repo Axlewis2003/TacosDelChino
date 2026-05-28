@@ -1,5 +1,5 @@
 public class ChipsAndSalsa {
-    private String salsaType;
+    private final String salsaType;
 
     public ChipsAndSalsa(String salsaType) {
         this.salsaType = salsaType;
